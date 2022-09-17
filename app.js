@@ -16,10 +16,10 @@ copyBtn.addEventListener("click", copyPassword);
 // ***** INPUT RANGE FUNCTIONALITY *****
 
 // changing character length value
-function updateLength () {
+function updateLength() {
     return labelLength.textContent = inputLength.value;
 }
-    
+
 inputLength.addEventListener("mousemove", updateLength);
 inputLength.addEventListener("change", updateLength);
 
@@ -33,7 +33,7 @@ function updateSlider() {
 
 inputLength.addEventListener("mousemove", updateSlider);
 inputLength.addEventListener("change", updateSlider);
-    
+
 
 // ***** PASSWORD STRENGTH *****
 
@@ -55,7 +55,7 @@ function changeStrength() {
         }
     })
     //...to change styles depending on number of checked checkboxes + length of the password
-    if (count == 0 || inputLength.value == 0 ) {
+    if (count == 0 || inputLength.value == 0) {
         strengthText.textContent = "";
         lines.forEach(line => {
             line.classList.remove("weak", "medium", "strong", "tooWeak")
@@ -66,7 +66,7 @@ function changeStrength() {
         lines.forEach(line => {
             line.classList.remove("weak", "medium", "strong");
         });
-    } else if ( count == 2 || inputLength.value < 6 ) {
+    } else if (count == 2 || inputLength.value < 6) {
         strengthText.textContent = "weak";
         line1.classList.add("weak");
         line2.classList.add("weak");
@@ -107,49 +107,86 @@ inputLength.addEventListener("change", changeStrength);
 const generator = document.getElementById("generator");
 const password = document.getElementById("password");
 
-function generate () {
+//function to generate password
+function generate() {
     const uppercase = document.getElementById("uppercase").checked;
     const lowercase = document.getElementById("lowercase").checked;
     const numbers = document.getElementById("numbers").checked;
     const symbols = document.getElementById("symbols").checked;
-    
-    let charSet = [];
 
-    if (symbols) {
-        const symbolsSet = ".?!*+-@#$€ß¤÷×~ˇ^°";
-        for (let symbol of symbolsSet) {
-            charSet.push(symbol);
-        }
-    } if (lowercase) {
-        const lowercaseSet = "abcdefghijklmnopqrstuvwxyz";
-        for (let char of lowercaseSet) {
-            charSet.push(char);
-        }
-    } if (uppercase) {
-        const uppercaseSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        for (let bigChar of uppercaseSet) {
-            charSet.push(bigChar);
-        }
-    } if (numbers) {
-        const numbersSet = "0123456789";
-        for (let number of numbersSet) {
-            charSet.push(number);
-        }
+    //create sets
+    const symbolsSet = ".?!*+@#$€÷×~";
+    const lowercaseSet = "abcdefghijklmnopqrstuvwxyz";
+    const uppercaseSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbersSet = "0123456789";
+
+    //if nothing is checked 
+    if (inputLength.value == 0 || (!uppercase && !lowercase && !numbers && !symbols)) {
+        password.textContent = "P4$5W0rD!";
+        password.style.color = "#817D92";
+        return;
     }
-    //...now I have correct charset saved in charSet array, depending on checkboxes checked
 
+    let charSet = [];
+    //change charset depending on how many checkboxes are checked
+    generateCharSet(symbols, symbolsSet, charSet);
+    generateCharSet(lowercase, lowercaseSet, charSet);
+    generateCharSet(uppercase, uppercaseSet, charSet);
+    generateCharSet(numbers, numbersSet, charSet);
+
+    //generate result
     let result = [];
     for (let i = inputLength.value; i > 0; i--) {
         result.push(charSet[Math.floor(Math.random() * charSet.length)]);
     }
 
-   password.textContent = result.join("");
+    //check if it contains all it shouls
+    checkIfContains(lowercase, lowercaseSet, result);
+    checkIfContains(uppercase, uppercaseSet, result);
+    checkIfContains(numbers, numbersSet, result);
+    checkIfContains(symbols, symbolsSet, result);
+
+    //we have result!
+    password.textContent = result.join("");
+
+    //brighten the password
+    password.style.color = "#E6E5EA";
+
+    //change the font for mobile if its too long
+    if (inputLength.value > 13) {
+        password.classList.add("smaller");
+    } else {
+        password.classList.remove("smaller");
+    }
 }
 
+
+// function to check if it contains what it should
+function checkIfContains(what, whatSet, arr) {
+    let arrayIncludesThis = false;
+    for (let char of arr) {
+        if (whatSet.includes(char)) {
+            arrayIncludesThis = true;
+        }
+    }
+    if (lowercase && !arrayIncludesThis) {
+        arr[Math.floor(Math.random() * arr.length)] = whatSet[Math.floor(Math.random() * whatSet.length)];
+    }
+}
+
+//function to change charset depending on how many checkboxes are checked
+function generateCharSet(whatIsChecked, wantedSet, desiredResult) {
+    if (whatIsChecked) {
+        for (let i of wantedSet) {
+            desiredResult.push(i);
+        }
+    }
+}
+
+// add the functionality to the button and enter keypress
 generator.addEventListener("click", generate);
 window.addEventListener("keypress", (e) => {
     if (e.key == "Enter") {
         generate();
     }
 })
-
