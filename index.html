@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png"> -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Password generator app</title>
+</head>
+
+<body>
+  <script defer src="app.js"></script>
+
+  <main class="container">
+    <h1 class="h--1">Password Generator</h1>
+    <div class="container__inputDiv">
+      <p class="container__inputDiv__password pass--wrd" id="password">P4$5W0rD!</p>
+      <button type="button" class="container__inputDiv__btn" id="copy"></button>
+    </div>
+    <div class="container__box">
+      <form action="">
+        <div class="container__box__FORM__labels">
+          <label class="label1 bo--dy" for="length">Character length</label>
+          <p class="label2 pass--wrd" id="label">10</p>
+        </div>
+        <input type="range" name="lengthInput" id="length" min="0" max="20" value="10">
+        <div class="leftTrack"></div>
+        <div class="rightTrack"></div>
+      </form>
+
+      <form class="includeForm" action="">
+        <label class="bo--dy includeLabel" for="uppercase">Include Uppercase Letters
+          <input id="uppercase" class="includeCheckbox" type="checkbox">
+          <span class="checkmark"></span>
+        </label>
+      </form>
+      <form class="includeForm" action="">
+        <label class="bo--dy includeLabel" for="lowercase">Include Lowercase Letters
+          <input id="lowercase" class="includeCheckbox" type="checkbox">
+          <span class="checkmark"></span>
+        </label>
+      </form>
+      <form class="includeForm" action="">
+        <label class="bo--dy includeLabel" for="numbers">Include Numbers
+          <input id="numbers" class="includeCheckbox" type="checkbox">
+          <span class="checkmark"></span>
+        </label>
+      </form>
+      <form class="includeForm" action="">
+        <label class="bo--dy includeLabel" for="symbols">Include Symbols
+          <input id="symbols" class="includeCheckbox" type="checkbox">
+          <span class="checkmark"></span>
+        </label>
+      </form>
+
+      <div class="container__box__minibox">
+        <p class="bo--dy up--case">strength</p>
+        <div class="container__box__minibox__inception">
+          <p class="la--bel up--case" id="strengthText">too weak!</p>
+          <div class="container__box__minibox__inception__lines">
+            <span id="line1" class="line tooWeak"></span>
+            <span id="line2" class="line"></span>
+            <span id="line3" class="line"></span>
+            <span id="line4" class="line"></span>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn-generate bo--dy up--case" id="generator">generate</button>
+
+    </div>
+  </main>
+
+
+
+  <!-- 
+  Strength
+
+  Generate -->
+
+</body>
+
+</html>
