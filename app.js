@@ -163,7 +163,8 @@ function generate() {
 
 // function to check if it contains what it should
 function checkIfContains(what, whatSet, arr) {
-    let arrayIncludesThis = false;
+       if (what) {
+      let arrayIncludesThis = false;
     for (let char of arr) {
         if (whatSet.includes(char)) {
             arrayIncludesThis = true;
@@ -171,6 +172,7 @@ function checkIfContains(what, whatSet, arr) {
     }
     if (lowercase && !arrayIncludesThis) {
         arr[Math.floor(Math.random() * arr.length)] = whatSet[Math.floor(Math.random() * whatSet.length)];
+    }  
     }
 }
 
