@@ -22,6 +22,7 @@ function updateLength() {
 
 inputLength.addEventListener("mousemove", updateLength);
 inputLength.addEventListener("change", updateLength);
+inputLength.addEventListener("touchmove", updateLength);
 
 //changing tracks 
 const leftTrack = document.querySelector(".leftTrack");
@@ -33,7 +34,7 @@ function updateSlider() {
 
 inputLength.addEventListener("mousemove", updateSlider);
 inputLength.addEventListener("change", updateSlider);
-
+inputLength.addEventListener("touchmove", updateSlider);
 
 // ***** PASSWORD STRENGTH *****
 
