@@ -259,9 +259,8 @@ input[type=range]::-ms-track {
 }
 
 /* On mouse-over, add a background color */
-.includeLabel:hover input~.checkmark {
-    background-color: var(--green);
-    border: none;
+.checkmark:hover {
+    background-color: var(--green)
 }
 
 /* When the checkbox is checked, add a background */
@@ -424,10 +423,9 @@ input[type=range]::-ms-track {
     .smaller {
         font-size: calc(22rem/16);
     }
-    .includeLabel:hover input~.checkmark {
-        background-color: #24232C;
-        border: 2px solid lightgray;
- }
+    .checkmark:hover {
+        background-color: var(--darkGrey);
+    }
 }
 
 
